@@ -9,9 +9,6 @@
 name: Test
 on:
   push:
-    branches:
-      - main
-      - stable*
   pull_request:
 
 permissions:
