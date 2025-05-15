@@ -113,6 +113,16 @@ abstract class CommonAPITest extends AbstractAPITest {
 	}
 
 	/** @depends testCheckForReferenceNotes */
+	public function testNoHiddenNotes(array $refNotes) : void {
+		$this->checkGetReferenceNotes($refNotes, 'Pre-condition');
+
+		foreach ($refNotes as $note) {
+			$this->assertNotEquals('metadata', $note->title, 'Metadata file is not visible').
+			$this->assertStringStartsNotWith('.', $note->category, 'Category is not hidden');
+		}
+	}
+
+	/** @depends testCheckForReferenceNotes */
 	public function testCreateNotes(array $refNotes) : array {
 		$this->checkGetReferenceNotes($refNotes, 'Pre-condition');
 		$testNotes = [];
